@@ -7,6 +7,10 @@ This is an embedded Rust project that utilizes the BBC Microbit microcontroller 
 ## 1 Debug message
 It simply runs a loop that outputs a debug message using (rtt-target)[https://docs.rs/rtt-target/latest/rtt_target/] (Real-Time Transfer protocol) which should appear in your terminal.
 
+## 2 Blinky-LED
+### manually setup
+Configure GPIO pins manually according to nRF52833 product specification document using unsafe rust and pointers.  
+
 # Setup
 - install the cargo plugin `cargo-embed` using `$cargo install cargo-embed` (may take a while)
 
