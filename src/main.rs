@@ -1,27 +1,25 @@
 #![no_std]
 #![no_main]
 
-use cortex_m::asm::nop;
-use cortex_m_rt::entry;
-use embedded_hal::digital::{OutputPin, PinState};
-use hal::pac;
-use nrf52833_hal as hal;
 use panic_halt as _;
+
+use cortex_m_rt::entry;
+use embedded_hal::{delay::DelayNs, digital::OutputPin};
+use microbit::{board::Board, hal::timer::Timer};
 
 #[entry]
 fn main() -> ! {
-    let p = pac::Peripherals::take().unwrap();
-    let port0 = hal::gpio::p0::Parts::new(p.P0);
+    let mut board = Board::take().unwrap();
 
-    let _col1 = port0.p0_28.into_push_pull_output(hal::gpio::Level::Low);
-    let mut row1 = port0.p0_21.into_push_pull_output(hal::gpio::Level::Low);
+    let mut timer = Timer::new(board.TIMER0);
 
-    let mut is_on: bool = false;
+    let _ = board.display_pins.col1.set_low();
+    let mut row1 = board.display_pins.row1;
+
     loop {
-        let _ = row1.set_state(PinState::from(is_on));
-        for _ in 0..400_000 {
-            nop();
-        }
-        is_on = !is_on;
+        let _ = row1.set_low();
+        timer.delay_ms(1_000);
+        let _ = row1.set_high();
+        timer.delay_ms(1_000);
     }
 }
