@@ -10,10 +10,13 @@ use rtt_target::{rprintln, rtt_init_print};
 fn main() -> ! {
     rtt_init_print!();
     rprintln!("Hello, world!");
+    let mut x: u32 = 0;
     loop {
-        rprintln!("Echo...");
+        rprintln!("Echo...{}", x);
         for _ in 0..100_000 {
             nop();
         }
+        x += 1;
+        x %= 10;
     }
 }

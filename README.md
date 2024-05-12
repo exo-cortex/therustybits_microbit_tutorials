@@ -2,7 +2,10 @@
 
 Follow-along repository for embedded Rust tutorial video series (The Rusty Bits)[https://www.youtube.com/@therustybits] on Youtube.
 
-This is an embedded Rust project that utilizes the BBC Microbit microcontroller board. The microbit is a microcontroller board with a 5x5 LED-matrix, sensors, a microfone, two buttons and a speaker. It uses an nRF52833 microprocessor. It simply runs a loop that outputs a debug message using (rtt-target)[https://docs.rs/rtt-target/latest/rtt_target/] (Real-Time Transfer protocol) which should appear in your terminal.
+This is an embedded Rust project that utilizes the BBC Microbit microcontroller board. The microbit is a microcontroller board with a 5x5 LED-matrix, sensors, a microfone, two buttons and a speaker. It uses an nRF52833 microprocessor. 
+
+## 1 Debug message
+It simply runs a loop that outputs a debug message using (rtt-target)[https://docs.rs/rtt-target/latest/rtt_target/] (Real-Time Transfer protocol) which should appear in your terminal.
 
 # Setup
 - install the cargo plugin `cargo-embed` using `$cargo install cargo-embed` (may take a while)
