@@ -16,6 +16,8 @@ Configure GPIOs using the peripherals provided by the PAC.
 Configure GPIOs using the hardware abstraction layer which in turn accesses the pac.
 ### d using `microbit-v2` - the BSP (board support package) for the microbit
 Using  the board support packaget for the microbit we can use everything even more ergonomically.
+### e use the `microbit-v2`'s display struct
+Displaying 2 different 5x5 1bit images on the microbit.
 
 # Setup
 - install the cargo plugin `cargo-embed` using `$cargo install cargo-embed` (may take a while)

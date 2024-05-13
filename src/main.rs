@@ -5,21 +5,32 @@ use panic_halt as _;
 
 use cortex_m_rt::entry;
 use embedded_hal::{delay::DelayNs, digital::OutputPin};
-use microbit::{board::Board, hal::timer::Timer};
+use microbit::{board::Board, display::blocking::Display, hal::timer::Timer};
 
 #[entry]
 fn main() -> ! {
     let mut board = Board::take().unwrap();
-
     let mut timer = Timer::new(board.TIMER0);
+    let mut display = Display::new(board.display_pins);
 
-    let _ = board.display_pins.col1.set_low();
-    let mut row1 = board.display_pins.row1;
+    #[allow(non_snake_case)]
+    let letter_X = [
+        [1, 0, 0, 0, 1],
+        [0, 1, 0, 1, 0],
+        [0, 0, 1, 0, 0],
+        [0, 1, 0, 1, 0],
+        [1, 0, 0, 0, 1],
+    ];
+    let letter_O = [
+        [0, 1, 1, 1, 0],
+        [1, 0, 0, 0, 1],
+        [1, 0, 0, 0, 1],
+        [1, 0, 0, 0, 1],
+        [0, 1, 1, 1, 0],
+    ];
 
     loop {
-        let _ = row1.set_low();
-        timer.delay_ms(1_000);
-        let _ = row1.set_high();
-        timer.delay_ms(1_000);
+        let _ = display.show(&mut timer, letter_O, 200);
+        let _ = display.show(&mut timer, letter_X, 300);
     }
 }
